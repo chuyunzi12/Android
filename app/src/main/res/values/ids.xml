@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="button_cancel" type="id">cancel</item>
+    <item name="button_ok" type="id">ok</item>
+    <item name="editText_book_price" type="id">price</item>
+    <item name="editText_book_title" type="id">title</item>
+</resources>
