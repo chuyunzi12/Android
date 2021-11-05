@@ -2,9 +2,6 @@ package com.jnu.myapplication.data.model;
 
 import java.io.Serializable;
 
-/**
- * Created by jszx on 2019/9/24.
- */
 //book类实现序列化才能在返回的时候再进人能刚才修改的操作界面
 public class Book implements Serializable {
 

@@ -38,6 +38,7 @@ public class BookListMainActivity extends AppCompatActivity {
     private ArrayList<Book> listBooks= new ArrayList<>();
     private BookAdapter bookAdapter;
     private BookSaver bookSaver;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,17 +48,20 @@ public class BookListMainActivity extends AppCompatActivity {
         listBooks=bookSaver.load();
         if(listBooks.size()==0)
             init();
+
         listViewBooks=(ListView)this.findViewById(R.id.recycler_view);
         bookAdapter = new BookAdapter(BookListMainActivity.this, R.layout.recycle_view_item, listBooks);
         listViewBooks.setAdapter(bookAdapter);
 
         this.registerForContextMenu(listViewBooks);
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         bookSaver.save();
     }
+
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
 
@@ -69,7 +73,7 @@ public class BookListMainActivity extends AppCompatActivity {
             menu.setHeaderTitle(listBooks.get(info.position).getTitle());
             //添加内容
             menu.add(0, CONTEXT_MENU_DELETE, 0, "删除");
-            menu.add(0, CONTEXT_MENU_NEW, 0, "新建");
+            menu.add(0, CONTEXT_MENU_NEW, 0, "添加");
             menu.add(0, CONTEXT_MENU_UPDATE, 0, "更新");
             menu.add(0, CONTEXT_MENU_ABOUT, 0, "关于...");
 
@@ -165,7 +169,7 @@ public class BookListMainActivity extends AppCompatActivity {
                 break;
             }
             case CONTEXT_MENU_ABOUT:
-                Toast.makeText(this, "版权所有by shpchen!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "版权所有by grt!", Toast.LENGTH_SHORT).show();
                 break;
         }
         return super.onContextItemSelected(item);
