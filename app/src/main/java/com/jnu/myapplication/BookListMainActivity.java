@@ -90,8 +90,8 @@ public class BookListMainActivity extends AppCompatActivity {
                     int position=data.getIntExtra("edit_position",0);
                     String title=data.getStringExtra("book_title");
                     double price =data.getDoubleExtra("book_price",0);
-                    getListBooks().add(position, new Book(title,R.drawable.book_no_name,price));
-                    //listBooks.add(position, new Book(title,R.drawable.book_no_name,price));
+                    getListBooks().add(position, new Book(title,R.drawable.book_no_name));
+                    //listBooks.add(position, new Book(title,R.drawable.book_no_name));
                     //通知适配器已改变
                     bookAdapter.notifyDataSetChanged();
 
@@ -107,7 +107,7 @@ public class BookListMainActivity extends AppCompatActivity {
                     Book book= getListBooks().get(position);
                     // Book book=listBooks.get(position);
                     book.setTitle(name);
-                    book.setPrice(price);//book类没有price
+                    //book.setPrice(price);book类没有price
                     //通知适配器已改变
                     bookAdapter.notifyDataSetChanged();
 
@@ -123,7 +123,7 @@ public class BookListMainActivity extends AppCompatActivity {
             case CONTEXT_MENU_NEW: {
                 AdapterView.AdapterContextMenuInfo menuInfo=(AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
 
-                Intent intent = new Intent(BookListMainActivity.this,NewBookActivity.class);
+                Intent intent = new Intent(BookListMainActivity.this, EditBookActivity.class);
                 intent.putExtra("edit_position",menuInfo.position);
                 intent.putExtra("book_title","无名书籍");
                 intent.putExtra("book_price","0.0");
@@ -136,10 +136,10 @@ public class BookListMainActivity extends AppCompatActivity {
                 AdapterView.AdapterContextMenuInfo menuInfo=(AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
                 Book book=listBooks.get(menuInfo.position);
 
-                Intent intent = new Intent(BookListMainActivity.this,NewBookActivity.class);
+                Intent intent = new Intent(BookListMainActivity.this, EditBookActivity.class);
                 intent.putExtra("edit_position",menuInfo.position);
                 intent.putExtra("book_title",book.getTitle());
-                intent.putExtra("book_price",book.getPrice());
+                //intent.putExtra("book_price",book.getPrice());
                 //startActivityForResult()方法是主活动BookListActivity用来启动NewBookActivity的
                 startActivityForResult(intent, REQUEST_CODE_UPDATE_BOOK);
                 break;
@@ -182,9 +182,9 @@ public class BookListMainActivity extends AppCompatActivity {
 
     private void init(){
 
-        listBooks.add(new Book("软件项目管理案例教程（第4版）", R.drawable.book_2,1.0));
-        listBooks.add(new Book("创新工程实践", R.drawable.book_no_name,2.0));
-        listBooks.add(new Book("信息安全数学基础（第2版）", R.drawable.book_1,3.0));
+        listBooks.add(new Book("软件项目管理案例教程（第4版）", R.drawable.book_2));
+        listBooks.add(new Book("创新工程实践", R.drawable.book_no_name));
+        listBooks.add(new Book("信息安全数学基础（第2版）", R.drawable.book_1));
 
     }
 
@@ -201,25 +201,12 @@ public class BookListMainActivity extends AppCompatActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            /*Book book = getItem(position);//获取当前项的实例
+            Book book = getItem(position);//获取当前项的实例
             View view = LayoutInflater.from(getContext()).inflate(resourceId, parent, false);
             ((ImageView) view.findViewById(R.id.image_view_book_cover)).setImageResource(book.getCoverResourceId());
             ((TextView) view.findViewById(R.id.text_view_book_title)).setText(book.getTitle());
-            ((TextView)view.findViewById(R.id.textView_book_price)).setText("价格："+book.getPrice()+"元");
 
-            return view;*/
-            //getview函数必须重写，否则无法进入App
-            LayoutInflater mInflater= LayoutInflater.from(this.getContext());
-            View item = mInflater.inflate(this.resourceId,null);
-
-            ImageView bookImage = item.findViewById(R.id.image_view_book_cover);
-            TextView bookTitle = item.findViewById(R.id.text_view_book_title);
-
-            Book book_item = this.getItem(position);
-            bookImage.setImageResource(book_item.getCoverResourceId());
-            bookTitle.setText(book_item.getTitle()+ "," + book_item.getPrice() + "元");
-
-            return item;
+            return view;
         }
     }
 }

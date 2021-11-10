@@ -6,15 +6,14 @@ import java.io.Serializable;
 public class Book implements Serializable {
 
 
-    public Book(String title, int coverResourceId, double price) {
+    public Book(String title, int coverResourceId) {
         this.setTitle(title);
         this.setCoverResourceId(coverResourceId);
-        this.setPrice(price);
     }
 
     private String title;
     private int coverResourceId;
-    private  double price;
+
 
 
     public String getTitle() {
@@ -33,11 +32,5 @@ public class Book implements Serializable {
         this.coverResourceId = coverResourceId;
     }
 
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
+    public void getPrice() { }
 }
