@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">18信安龚瑞庭-BookList</string>
+    <string name="book_1">软件项目管理案例教程（第4版）</string>
+    <string name="book_2">创新工程实践</string>
+    <string name="book_no_name">信息安全数学基础（第2版）</string>
+    <string name="button_ok">确定</string>
+    <string name="text_view_newbook_name">图书名称</string>
+    <string name="new_bookname">请输入新书的书名</string>
+    <string name="button_cancel">取消</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+</resources>
