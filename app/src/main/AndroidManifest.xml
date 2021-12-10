@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.casper.testdrivendevelopment">
+    package="com.grt.testdrivendevelopment">
 
     <application
         android:allowBackup="true"
@@ -9,10 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EditBookActivity">
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value= "zg9rxbce1O16znTE12AMAIchcSHtkBIE" />
+
+        <activity android:name="com.grt.testdrivendevelopment.EditBookActivity">
 
         </activity>
-        <activity android:name=".BookListMainActivity">
+        <activity android:name="com.grt.testdrivendevelopment.BookListMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,4 +26,36 @@
 
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <!-- 这个权限用于进行网络定位 -->
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    //获取设备网络状态，禁用后无法获取网络状态
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    //网络权限，当禁用后，无法进行检索等相关业务
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    //读取设备硬件信息，统计数据
+
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+
+    //读取系统信息，包含系统版本等信息，用作统计
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    //获取设备的网络状态，鉴权所需网络代理
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    //鉴权所需该权限获取进程列表
+
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    //使用步行AR导航，配置Camera权限
+
 </manifest>

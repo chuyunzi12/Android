@@ -5,10 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".MapViewFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/baidu_map_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:clickable="true" />
 
 </FrameLayout>

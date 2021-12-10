@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.casper.testdrivendevelopment.BookListMainActivity"
+    tools:context="com.grt.testdrivendevelopment.BookListMainActivity"
     android:orientation="vertical">
 <android.support.design.widget.TabLayout
     android:id="@+id/tablayout_header"
