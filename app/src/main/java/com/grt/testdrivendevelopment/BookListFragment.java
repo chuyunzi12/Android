@@ -6,10 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -22,8 +18,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.grt.testdrivendevelopment.dataprocessor.Book;
-import com.grt.testdrivendevelopment.dataprocessor.DataBank;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+
+import com.grt.testdrivendevelopment.data.ShopItem;
+import com.grt.testdrivendevelopment.data.DataBank;
 
 import java.util.List;
 
@@ -83,7 +84,7 @@ public class BookListFragment extends Fragment {
         databank.Load();
         //防止空数据，添一条作为测试
         if(databank.getBooks().size()==0){
-            databank.getBooks().add(new Book("请添加一本书",R.drawable.book_no_name));
+            databank.getBooks().add(new ShopItem("请添加一本书",R.drawable.book_no_name));
             databank.Save();
         }
     }
@@ -105,7 +106,7 @@ public class BookListFragment extends Fragment {
                 if (resultCode == RESULT_OK) {
                     NewBookName = data.getStringExtra("book_name");
                     position = data.getIntExtra("book_position",0);
-                    databank.getBooks().add(position,new Book(NewBookName,R.drawable.book_no_name));
+                    databank.getBooks().add(position,new ShopItem(NewBookName,R.drawable.book_no_name));
                     databank.Save();
                     adapter.notifyDataSetChanged();
                 }
@@ -188,25 +189,25 @@ public class BookListFragment extends Fragment {
 
     }
 
-    private static class BookAdapter extends ArrayAdapter<com.grt.testdrivendevelopment.dataprocessor.Book> {
+    private static class BookAdapter extends ArrayAdapter<ShopItem> {
         private final int resourceId;
-        public BookAdapter(@NonNull Context context, int resource, @NonNull List<com.grt.testdrivendevelopment.dataprocessor.Book> objects) {
+        public BookAdapter(@NonNull Context context, int resource, @NonNull List<ShopItem> objects) {
             super(context, resource, objects);
             this.resourceId=resource;
         }
         @NonNull
         @Override
         public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-            Book book = getItem(position);
+            ShopItem shopItem = getItem(position);
             View view ;
             if(null==convertView)
                 view = LayoutInflater.from(getContext()).inflate(R.layout.item_books, parent, false);
             else
                 view =convertView;
 
-            assert book != null;
-            ((TextView) view.findViewById(R.id.text_view_book_title)).setText(book.getBook_Name());
-            ((ImageView) view.findViewById(R.id.image_view_book_cover)).setImageResource(book.getBook_Image());
+            assert shopItem != null;
+            ((TextView) view.findViewById(R.id.text_view_book_title)).setText(shopItem.getBook_Name());
+            ((ImageView) view.findViewById(R.id.image_view_book_cover)).setImageResource(shopItem.getBook_Image());
 
             return view;
         }
