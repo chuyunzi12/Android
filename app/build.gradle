@@ -13,7 +13,7 @@ android {
     }
     defaultConfig {
         applicationId "com.grt.testdrivendevelopment"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 31
         versionCode 1
         versionName "1.0"
@@ -41,9 +41,14 @@ dependencies {
     implementation 'com.android.support:support-v4:28.0.0'
     implementation files('libs/BaiduLBS_Android.jar')
     implementation 'androidx.annotation:annotation:1.3.0'
-    implementation 'androidx.viewpager2:viewpager2:1.0.0'
     implementation 'androidx.test.ext:junit:1.1.3'
-    implementation 'androidx.test:monitor:1.4.0'
+    implementation 'androidx.test:monitor:1.5.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.4.0'
+    implementation 'androidx.viewpager2:viewpager2:1.1.0-beta01'
+    //直接引入material UI
+    implementation "com.google.android.material:material:1.4.0"
+
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })

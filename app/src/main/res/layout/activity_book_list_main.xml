@@ -6,17 +6,18 @@
     android:layout_height="match_parent"
     tools:context="com.grt.testdrivendevelopment.BookListMainActivity"
     android:orientation="vertical">
-<android.support.design.widget.TabLayout
+
+<com.google.android.material.tabs.TabLayout
     android:id="@+id/tablayout_header"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-</android.support.design.widget.TabLayout>
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewpager_content"
+</com.google.android.material.tabs.TabLayout>
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewpager2_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    </android.support.v4.view.ViewPager>
+    </androidx.viewpager2.widget.ViewPager2>
 
 </LinearLayout>

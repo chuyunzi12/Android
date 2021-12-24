@@ -2,83 +2,66 @@ package com.grt.testdrivendevelopment;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
+import androidx.fragment.app.FragmentActivity;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
-
-import java.util.ArrayList;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 public class BookListMainActivity extends AppCompatActivity {
+
+
+    private String[] tableTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_list_main);
+        tableTitle=new String[]{"图书","新闻","游戏","卖家"};
 
+        ViewPager2 viewPagerFragment=findViewById(R.id.viewpager2_content);
+        viewPagerFragment.setAdapter(new MyFragmentAdapter(this));
 
-        ArrayList<Fragment> datas = new ArrayList<Fragment>();
-        datas.add(new BookListFragment());
-        datas.add(new BrowserFragment());
-        datas.add(new MapViewFragment());
-
-        ArrayList<String> titles = new ArrayList<String>();
-        titles.add("图书");
-        titles.add("新闻");
-        titles.add("卖家");
-
-        MyPageAdapter myPageAdapter = new MyPageAdapter(this.getSupportFragmentManager());
-        myPageAdapter.setData(datas);
-        myPageAdapter.setTitles(titles);
-
-        TabLayout tabLayout = (TabLayout) this.findViewById(R.id.tablayout_header) ;
-        ViewPager viewPager = (ViewPager)this.findViewById(R.id.viewpager_content);
-
-        // 将适配器设置进ViewPager
-        viewPager.setAdapter(myPageAdapter);
-        // 将ViewPager与TabLayout相关联
-        tabLayout.setupWithViewPager(viewPager);
-
-
-
+        TabLayout tableLayoutHeader=findViewById(R.id.tablayout_header);
+        TabLayoutMediator tabLayoutMediator=new TabLayoutMediator(tableLayoutHeader, viewPagerFragment, new TabLayoutMediator.TabConfigurationStrategy() {
+            @Override
+            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                tab.setText(tableTitle[position]);
+            }
+        });
+        tabLayoutMediator.attach();
     }
 
-    public class MyPageAdapter extends FragmentPagerAdapter {
-        ArrayList<Fragment> datas;
-        ArrayList<String> titles;
+    private class MyFragmentAdapter extends FragmentStateAdapter {
 
-        public MyPageAdapter(FragmentManager fm) {
-            super(fm);
+
+        public MyFragmentAdapter(@NonNull FragmentActivity fragmentActivity) {
+            super(fragmentActivity);
         }
 
-        public void setData(ArrayList<Fragment> datas) {
-            this.datas = datas;
-        }
-
-        public void setTitles(ArrayList<String> titles) {
-            this.titles = titles;
+        @NonNull
+        @Override
+        public Fragment createFragment(int position) {
+            switch (position)
+            {
+                case 0:
+                    return BookListFragment.newInstance();
+                case 1:
+                    return BrowserFragment.newInstance();
+                case 2:
+                    return GameFragment.newInstance();
+                default:
+                    return MapViewFragment.newInstance();
+            }
         }
 
         @Override
-        public Fragment getItem(int position) {
-            return datas == null ? null : datas.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return datas == null ? 0 : datas.size();
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return titles == null ? null : titles.get(position);
+        public int getItemCount() {
+            return 4;
         }
     }
-
-
-
 }
-
